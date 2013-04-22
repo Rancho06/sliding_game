@@ -1,8 +1,8 @@
 # Game - Programming Assignments Private Repository
 ### Student Information
-  + Name: Tommy Trojan
-  + USC Email: ttrojan@usc.edu
-  + USC ID: 0123456789
+  + Name: Shu ZHou
+  + USC Email: shuzhou@usc.edu
+  + USC ID: 8960637637
 
 ### Game Information
   + Game Name: myAwsomeGame

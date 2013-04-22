@@ -1,5 +1,5 @@
 # Game Design
-In this game, I have one player against five bad things. They are soldiers, rocks, tanks, planes, UFOs.
+In this game, I have one player against five bad things. They are soldiers, Balls, tanks, planes, UFOs.
 
 # How to play?
 users use keyboard to control the player. UP is jump. LEFT and RIGHT is control left and right speed. Space is fire.
@@ -23,4 +23,8 @@ Tool Bar: Start Game, Pause Game, Quit game, Restart Game
 
 # Pictures
 ![alt text](http://kiwisinarmour.hobbyvista.com/images/M3_2_Tanks.jpg "Tanks")
+![alt text](http://pic.sayingfly.com/img/bizhi/img/201104/25/jian11_zhandouji-001.jpg "Planes")
+![alt text](http://www.intelligent.net/sites/all/themes/marinelli/images/Dismounted%20Soldier%20-%20Gear.jpg "Soldiers")
+![alt text](http://www.ballreviews.com/Content/Balls/1371.jpg "Ball")
+
 
