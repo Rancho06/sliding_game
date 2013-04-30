@@ -1,8 +1,6 @@
 #include "graphicswindow.h"
 #include <cmath>
-#include <iostream>
 
-using namespace std;
 /** 
 Constructor sets up the scene
 @param e_b A pointer tothe error Box
@@ -91,7 +89,6 @@ void GraphicsWindow::createthings(){
 	
 	}
 	
-	
 	if((*myLayouts)[0]->pos().x()<=-580){
 		delete (*myLayouts)[0];
 		myLayouts->pop_front();
@@ -102,7 +99,7 @@ void GraphicsWindow::createthings(){
 	}
 	
 	for(int i=0;i<myWeapons->size();i++){
-		if((*myWeapons)[i]->pos().x()>=650||(*myWeapons)[i]->getlife()<=0){
+		if((*myWeapons)[i]->pos().x()>=620||(*myWeapons)[i]->getlife()<=0){
 			delete (*myWeapons)[i];
 			(*myWeapons)[i]=NULL;
 		}
@@ -116,7 +113,6 @@ void GraphicsWindow::createthings(){
 			myWeapons->remove(i);
 	
 	}
-	
 	for(int i=0;i<myThings->size();i++){
 		if((*myThings)[i]->pos().x()<=-100||(*myThings)[i]->pos().y()>=350||(*myThings)[i]->getlife()<=0){
 			delete (*myThings)[i];
@@ -154,10 +150,6 @@ void GraphicsWindow::createthings(){
 			}
 		}
 	}
-	
-	
-	
-	
 	counttimer++;
 
 
@@ -202,15 +194,11 @@ void GraphicsWindow::playerOpenFire(){
 
 void GraphicsWindow::quitgame(){
 	for(int i=0;i<myThings->size();i++){
-		
-		delete (*myThings)[i];
-			
+		delete (*myThings)[i];	
 	}
 
 	for(int i=0;i<myWeapons->size();i++){
-		
-		delete (*myWeapons)[i];
-			
+		delete (*myWeapons)[i];	
 	}
 	
 	for(int i=0;i<myLayouts->size();i++){

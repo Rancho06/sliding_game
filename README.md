@@ -5,8 +5,8 @@
   + USC ID: 8960637637
 
 ### Game Information
-  + Game Name: myAwsomeGame
-  + Game Description: One sentence game description
+  + Game Name: Basketball Crossfire
+  + Game Description: Using basketball as fire to protect yourself from the harm.
   + [Game Design Doc](GameDesignDoc.md)
 
 
@@ -14,11 +14,11 @@
 The grader should use the following procedure to compile and run the code:
 ```shell
 #Compile Instructions
-echo "Write command here"
+echo "qmake -project, qmake, make"
 #Doxygen Instructions
-echo "Write command here"
+echo "doxygen -g config.txt, doxygen config.txt"
 #Command to run
-echo "Write command here"
+echo "./game_shuzhou"
 ```
 
 ### Screenshots -- [Optional]
