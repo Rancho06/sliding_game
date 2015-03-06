@@ -1,17 +1,20 @@
 #include "graphicswindow.h"
 #include <cmath>
-
+#include "main_window.h"
 /** 
 Constructor sets up the scene
 @param e_b A pointer tothe error Box
 */
-GraphicsWindow::GraphicsWindow(QLineEdit* sl){
+GraphicsWindow::GraphicsWindow(QLineEdit* sl,QLineEdit* ll,QTextEdit* mb,MainWindow* m_w){
+	mw=m_w;
 	scoreline=sl;
+	lifeline=ll;
+	messagebox=mb;
 	totalpoints=0;
 	this->setFixedSize(700,500);
 	counttimer=0;
 	timer=new QTimer();
-	timer->setInterval(20);
+	timer->setInterval(18);
 	layoutphoto=new QPixmap("layout.png");
 	tankphoto=new QPixmap("tank.png");
 	planephoto=new QPixmap("plane.png");
@@ -24,16 +27,6 @@ GraphicsWindow::GraphicsWindow(QLineEdit* sl){
 	
 	
 	scene = new QGraphicsScene();
-	
-	
-	/*scene->addItem(bomb);
-	bomb->setZValue(4);
-	scene->addItem(bullet);
-	bullet->setZValue(4);*/
-	
-	//scene->addPixmap(*layoutphoto);
-	
-	
 	myThings=new QVector<Thing*>;
 	myWeapons=new QVector<Thing*>;
 	myLayouts=new QVector<MyLayout*>;
@@ -99,9 +92,11 @@ void GraphicsWindow::createthings(){
 	}
 	
 	for(int i=0;i<myWeapons->size();i++){
-		if((*myWeapons)[i]->pos().x()>=620||(*myWeapons)[i]->getlife()<=0){
+		if((*myWeapons)[i]==NULL);
+		else if((*myWeapons)[i]->pos().x()>=620||(*myWeapons)[i]->getlife()<=0){
 			delete (*myWeapons)[i];
 			(*myWeapons)[i]=NULL;
+			
 		}
 		else{
 			(*myWeapons)[i]->move();
@@ -114,9 +109,11 @@ void GraphicsWindow::createthings(){
 	
 	}
 	for(int i=0;i<myThings->size();i++){
-		if((*myThings)[i]->pos().x()<=-100||(*myThings)[i]->pos().y()>=350||(*myThings)[i]->getlife()<=0){
+		if((*myThings)[i]==NULL);
+		else if((*myThings)[i]->pos().x()<=-100||(*myThings)[i]->pos().y()>=350||(*myThings)[i]->getlife()<=0){
 			delete (*myThings)[i];
 			(*myThings)[i]=NULL;
+			
 		}
 		else{
 			(*myThings)[i]->move();
@@ -131,13 +128,11 @@ void GraphicsWindow::createthings(){
 	
 	
 	for(int j=0;j<myThings->size();j++){
-		if(player->collidesWithItem((*myThings)[j])){
-				player->setlife(player->getlife()-1);
-				(*myThings)[j]->setlife(0);
-			}
+		if((*myThings)[j]==NULL);
+		else {
 		for(int i=0; i<myWeapons->size();i++){
-			
-			if ((*myWeapons)[i]->collidesWithItem((*myThings)[j])){
+			if((*myWeapons)[i]==NULL);
+			else if ((*myWeapons)[i]->collidesWithItem((*myThings)[j])){
 				(*myWeapons)[i]->setlife(0);
 				(*myThings)[j]->setlife((*myThings)[j]->getlife()-1);
 				totalpoints+=(*myThings)[j]->getvalue();
@@ -149,9 +144,22 @@ void GraphicsWindow::createthings(){
 				scoreline->insert(str);
 			}
 		}
+		
+		if(player->collidesWithItem((*myThings)[j])){
+				player->setlife(player->getlife()-1);
+				(*myThings)[j]->setlife(0);
+				lifeline->clear();
+				QString str;
+				str.setNum(player->getlife());
+				lifeline->insert(str);
+				
+		}
+		}
+		
+		
 	}
 	counttimer++;
-
+	if(player->getlife()==0){this->quitgame();}
 
 }
 
@@ -163,6 +171,7 @@ void GraphicsWindow::createlayout(){
 }
 
 void GraphicsWindow::createinitiallayout(){
+	totalpoints=0;
 	MyLayout* layout=new MyLayout(this,layoutphoto,50,0);
 	myLayouts->push_back(layout);
 	player=new Player(playerphoto,0,310);
@@ -193,20 +202,25 @@ void GraphicsWindow::playerOpenFire(){
 }
 
 void GraphicsWindow::quitgame(){
+	timer->stop();
 	for(int i=0;i<myThings->size();i++){
 		delete (*myThings)[i];	
 	}
-
+	myThings->clear();
 	for(int i=0;i<myWeapons->size();i++){
 		delete (*myWeapons)[i];	
 	}
-	
+	myWeapons->clear();
 	for(int i=0;i<myLayouts->size();i++){
 		delete (*myLayouts)[i];
 	}
-	
+	myLayouts->clear();
 	delete player;
-	
+	player=NULL; 
+	messagebox->clear();
+	messagebox->append("Congratulations! Your Final Score is: ");
+	messagebox->append(scoreline->text());
+	mw->releaseKeyboard();
 }
 
 

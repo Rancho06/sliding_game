@@ -28,9 +28,10 @@
 This class creates the scene and prepares the background on which the tiles are built
 @author Shu Zhou
 */
+class MainWindow;
 class GraphicsWindow : public QGraphicsView {
 public:
-    explicit GraphicsWindow(QLineEdit*);
+    explicit GraphicsWindow(QLineEdit*,QLineEdit*,QTextEdit*,MainWindow*);
  
     /** @return A pointer to the current scene*/
     QGraphicsScene* getscene(){return scene;};
@@ -43,12 +44,16 @@ public:
 	void playerJump();
 	void playerOpenFire();
 	void quitgame();
+	Player* getplayer(){return player;};
     
 private:
+	MainWindow* mw;
 	int counttimer;
 	int totalpoints;
 	QTimer* timer;
 	QLineEdit* scoreline;
+	QLineEdit* lifeline;
+	QTextEdit* messagebox;
 	/// A pointer to the scene
     QGraphicsScene *scene;
     QPixmap* layoutphoto;

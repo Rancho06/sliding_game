@@ -27,6 +27,7 @@ class MainWindow: public QMainWindow{
 		GraphicsWindow* getgraphwindow(){return gw;};
 		QLineEdit* getnameline(){return nameline;};
 		QLineEdit* getscoreline(){return scoreline;};
+		QLineEdit* getlifeline(){return lifeline;};
 		QTextEdit* getmessagebox(){return messagebox;};
 		QString getname(){return nameline->text();};
 	protected:
@@ -37,6 +38,7 @@ class MainWindow: public QMainWindow{
 		QLineEdit* nameline;
 		QLineEdit* scoreline;
 		QTextEdit* messagebox;
+		QLineEdit* lifeline;
 		
 		
 };

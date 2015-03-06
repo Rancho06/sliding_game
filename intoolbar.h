@@ -20,6 +20,7 @@ public:
 	InToolBar(MainWindow*,QApplication*);
 public slots:
 	void startGame();
+	void restartGame();
 	void quitGame();
 	void finishGame();
 	void pauseGame();

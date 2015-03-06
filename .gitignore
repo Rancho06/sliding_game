@@ -1,7 +1,15 @@
+.gitignore
+
 # Compiled Object files
 *.slo
 *.lo
 *.o
+*~
+moc*
+*.pro
+*.exe
+*.DS_Store
+game_shuzhou
 
 # Compiled Dynamic libraries
 *.so

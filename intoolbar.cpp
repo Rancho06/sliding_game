@@ -17,6 +17,11 @@ InToolBar::InToolBar(MainWindow* m_w,QApplication* q_a):QToolBar(){
 	this->addAction(StartGameAction);
 	connect(StartGameAction,SIGNAL(triggered()),this,SLOT(startGame()));
 	
+	QAction *RestartGameAction=new QAction("Restart",this);
+	this->addAction(RestartGameAction);
+	connect(RestartGameAction,SIGNAL(triggered()),this,SLOT(restartGame()));
+	
+	
 	QAction *FinishGameAction=new QAction("Finish Game",this);
 	this->addAction(FinishGameAction);
 	connect(FinishGameAction,SIGNAL(triggered()),this,SLOT(finishGame()));
@@ -46,6 +51,11 @@ void InToolBar::startGame(){
 	if(!timer->isActive()){
 		mw->grabKeyboard();
 		timer->start();
+		mw->getlifeline()->clear();
+		mw->getscoreline()->clear();
+		mw->getmessagebox()->clear();
+		mw->getlifeline()->insert("3");
+		mw->getscoreline()->insert("0");
  		mw->getgraphwindow()->createinitiallayout();
  	}
 }
@@ -57,21 +67,20 @@ void InToolBar::quitGame(){
 	qa->exit(0);
 }
 
-void InToolBar::finishGame(){
-	timer->stop();
-	mw->getgraphwindow()->quitgame();
-	mw->getmessagebox()->clear();
-	mw->getmessagebox()->append("Hi, ");
-	mw->getmessagebox()->append(mw->getname());
-	mw->getmessagebox()->append("\nYour Final Score is: ");
-	mw->getmessagebox()->append(mw->getscoreline()->text());
-	
-	
+void InToolBar::restartGame(){
+	finishGame();
+	startGame();
 
 }
 
 
+void InToolBar::finishGame(){
+	mw->getgraphwindow()->quitgame();
+}
+
+
 void InToolBar::pauseGame(){
+	if(mw->getgraphwindow()->getplayer()==NULL) return;
 	if(timer->isActive())
 		timer->stop();
 	else

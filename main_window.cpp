@@ -13,10 +13,11 @@ Constructor:
 */
 MainWindow::MainWindow(QApplication* app):QMainWindow(){
 	this->setFocus();
-	
+	lifeline=new QLineEdit();
 	scoreline=new QLineEdit();
+	messagebox=new QTextEdit();
 	//creating the central graphics window
-	gw=new GraphicsWindow(scoreline);
+	gw=new GraphicsWindow(scoreline,lifeline,messagebox,this);
 	this->setCentralWidget(gw);
 	
 	//creating the menu bar with a sub action called exit, which stops the game
@@ -38,13 +39,19 @@ MainWindow::MainWindow(QApplication* app):QMainWindow(){
 	qdw2->setFeatures(QDockWidget::NoDockWidgetFeatures);
 	
 	
+	lifeline->setReadOnly(true);
+	QDockWidget* qdw4=new QDockWidget("Lives Left");
+	qdw4->setWidget(lifeline);
+	addDockWidget(Qt::TopDockWidgetArea,qdw4);
+	qdw4->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	
 	QDockWidget* qdw=new QDockWidget("User Score");
 	qdw->setWidget(scoreline);
 	scoreline->setReadOnly(true);
 	addDockWidget(Qt::TopDockWidgetArea,qdw);
 	qdw->setFeatures(QDockWidget::NoDockWidgetFeatures);
 	
-	messagebox=new QTextEdit();
+	
 	messagebox->setReadOnly(true);
 	QDockWidget* qdw3=new QDockWidget("Message Box");
 	qdw3->setWidget(messagebox);
