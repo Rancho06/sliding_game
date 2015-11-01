@@ -21,5 +21,4 @@ echo "doxygen -g config.txt, doxygen config.txt"
 echo "./game_shuzhou"
 ```
 
-### Screenshots -- [Optional]
-You can either remove this section or add screenshots if you wish.
+
